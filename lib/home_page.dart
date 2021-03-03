@@ -79,61 +79,60 @@ class _HomePageState extends State<HomePage> {
                 final reverseIndex = (_guestBookList.length - 1) - index;
                 final currentGuest = _guestBookList[reverseIndex];
 
-                return _CardItem(
-                  item: currentGuest,
-                  animation: animation,
-                  onLongPress: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) {
-                        return SimpleDialog(
-                          title: Text(
-                            'Apakah Anda ingin mengapus ${currentGuest.name}?',
-                            textAlign: TextAlign.center,
-                          ),
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                              ),
-                              child: OutlineButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  _deleteGuest(
-                                    index,
-                                    reverseIndex,
-                                    currentGuest,
-                                  );
-                                },
-                                child: Text('Ya'),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: _CardItem(
+                    item: currentGuest,
+                    animation: animation,
+                    onLongPress: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return SimpleDialog(
+                            title: Text(
+                              'Apakah Anda ingin mengapus ${currentGuest.name}?',
+                              textAlign: TextAlign.center,
+                            ),
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                ),
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    _deleteGuest(
+                                      index,
+                                      reverseIndex,
+                                      currentGuest,
+                                    );
+                                  },
+                                  child: Text('Ya'),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                              ),
-                              child: RaisedButton(
-                                color: Theme.of(context).primaryColor,
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  'Tidak',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                              SizedBox(height: 10),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                ),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    'Tidak',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
                 );
               },
             ),
@@ -154,6 +153,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        autofocus: true,
         onPressed: () async {
           final result = await Navigator.push<Guest>(
             context,
